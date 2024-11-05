@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeachMate - שירותי חוף וים</title>
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical CSS here */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+
+    <!-- Preconnect to required origins -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Defer non-critical CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css"
+        media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print"
+        onload="this.media='all'">
+
+    <!-- Defer our CSS -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="scripts.js" as="script">
+
+    <!-- Load scripts with defer -->
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="scripts.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <div class="brand-container">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <span class="brand-emoji">🏖️</span>
+                    <span class="brand-text">BeachMate</span>
+                    <div class="box electric"></div>
+                    - שרותי חוף וים
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">דף הבית</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="maps.html">מפות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">שירותים</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">אודות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">צור קשר</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Video Background -->
+    <div class="video-background">
+        <div class="content-wrapper" style="min-height: 100vh; height: auto;">
+            <div class="hero-content">
+                <h1 class="main-title">ברוכים הבאים ל-BeachMate! 🌊</h1>
+                <p class="main-subtitle">גלו את החוף המושלם</p>
+                <p class="sub-text">עם BeachMate תוכלו למצוא את כל המידע שאתם צריכים על החופים בסביבתכם</p>
+                <button class="btn btn-primary btn-lg mt-4">התחילו עכשיו ⭐</button>
+            </div>
+
+            <!-- Floating Emojis -->
+            <div class="floating-emojis">
+                <span class="float-emoji">🏊‍♂️</span>
+                <span class="float-emoji">🏖️</span>
+                <span class="float-emoji">🌅</span>
+                <span class="float-emoji">🐠</span>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="cards-container">
+                <!-- חופים בעולם - עכשיו בשורה מלאה בראש -->
+                <div class="service-card travel-card full-width">
+                    <div class="card-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>חופים בישראל ובעולם</h3>
+                    <div class="card-content">
+                        <div class="destinations-container">
+                            <div class="israel-beaches">
+                                <h4>חופים בישראל</h4>
+                                <div class="destination">
+                                    <span>🏖️ חוף גורדון, תל אביב</span>
+                                    <button class="btn btn-sm btn-info view-on-map" data-lat="32.0833"
+                                        data-lng="34.7667">הצג במפה</button>
+                                </div>
+                                <div class="destination">
+                                    <span>🏖️ חוף הקשתות, אשדוד</span>
+                                    <button class="btn btn-sm btn-info view-on-map" data-lat="31.7959"
+                                        data-lng="34.6300">הצג במפה</button>
+                                </div>
+                                <div class="destination">
+                                    <span>🏖️ חוף אכזיב, נהריה</span>
+                                    <button class="btn btn-sm btn-info view-on-map" data-lat="33.0744"
+                                        data-lng="35.1008">הצג במפה</button>
+                                </div>
+                            </div>
+
+                            <div class="world-beaches">
+                                <h4>חופים בעולם</h4>
+                                <select class="form-select beach-region-select" onchange="updateBeachList(this.value)">
+                                    <option value="">בחר אזור בעולם</option>
+                                    <option value="europe">אירופה</option>
+                                    <option value="asia">אסיה</option>
+                                    <option value="americas">אמריקה</option>
+                                    <option value="oceania">אוקיאניה</option>
+                                </select>
+                                <div id="beachList" class="beach-list mt-3">
+                                    <!-- יתמלא דינמית על ידי JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <div id="worldMap" class="world-map"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- תחזית מזג אוויר וים -->
+                <div class="service-card weather-card">
+                    <div class="card-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>תחזית מזג אוויר וים</h3>
+                    <div class="card-content">
+                        <div class="weather-info">
+                            <div class="temperature">
+                                <span class="weather-emoji">🌡️</span>
+                                <span>27°C</span>
+                            </div>
+                            <div class="wind">
+                                <span class="weather-emoji"></span>
+                                <span>15 קמ"ש</span>
+                            </div>
+                            <div class="waves">
+                                <span class="weather-emoji">🌊</span>
+                                <span>גובה גלים: 0.5 מטר</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- מפות חופים -->
+                <div class="service-card map-card">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>מפות חופים</h3>
+                    <div class="card-content">
+                        <div class="beach-list">
+                            <ul>
+                                <li>🏊‍♂️ חוף הצוק - 2 ק"מ</li>
+                                <li>🏄‍♂️ חוף גורדון - 3.5 ק"מ</li>
+                                <li>⛱️ חוף פרישמן - 4 ק"מ</li>
+                            </ul>
+                        </div>
+                        <a href="maps.html" class="btn btn-primary mt-3">צפה בכל המפות</a>
+                    </div>
+                </div>
+
+                <!-- שיתוף שירותים -->
+                <div class="service-card sharing-card">
+                    <div class="card-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>שיתוף שירותים</h3>
+                    <div class="card-content">
+                        <p>שתפו עם חברים את השרותים שלנו דרך רשתות חברתיות</p>
+                        <div class="share-buttons">
+                            <button class="share-btn"><i class="fab fa-whatsapp"></i></button>
+                            <button class="share-btn"><i class="fab fa-telegram"></i></button>
+                            <button class="share-btn"><i class="fab fa-facebook"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ספורט ימי -->
+                <div class="service-card sports-card">
+                    <div class="card-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>ספורט ימי</h3>
+                    <div class="card-content">
+                        <p>הצטרפו לפעילויות ספורט ימי מגוונות</p>
+                        <div class="activities-list">
+                            <span class="activity">🏄‍♂️ גלישה</span>
+                            <span class="activity">🏊‍♂️ שחייה</span>
+                            <span class="activity">🚣‍♂️ חתירה</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- מוזיקה ופעילויות -->
+                <div class="service-card music-card">
+                    <div class="card-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>מוזיקה ופעילויות</h3>
+                    <div class="card-content">
+                        <p>תיהנו מהופעות חיות ופעילויות חוף</p>
+                        <div class="event-schedule">
+                            <div class="event">🎵 הופעה חיה - 20:00</div>
+                            <div class="event">🎨 סדנת אומנות - 16:00</div>
+                            <div class="event">🎪 מופע שקיעה - 18:30</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- אירועים קרובים -->
+                <div class="service-card events-card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>אירועים קרובים</h3>
+                    <div class="card-content">
+                        <div class="upcoming-events">
+                            <div class="event">📅 פסטיבל חוף - 15.6</div>
+                            <div class="event">🎉 מסיבת שקיעה - 20.6</div>
+                            <div class="event">🎭 הצגת ילדים - 25.6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="footer-text">שירותי חוף וים &copy; 2024. כל הזכויות שמורות.</p>
+                <p class="footer-text">שותפים: AnLoMinus & ChatGPT</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

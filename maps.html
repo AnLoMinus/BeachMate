@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeachMate - דשבורד מפות</title>
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .map-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-title {
+            color: #00796b;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .map {
+            height: 300px;
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 121, 107, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .navbar {
+            background-color: #004d40;
+            margin-bottom: 2rem;
+        }
+
+        .navbar-brand {
+            color: white;
+        }
+
+        body {
+            background-color: #e0f7fa;
+            padding-top: 60px;
+        }
+
+        /* הוספה לסגנונות הקיימים */
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-collapse {
+            flex-grow: 0;
+        }
+
+        .nav-link {
+            color: white !important;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                🗺️ BeachMate - דשבורד מפות
+            </a>
+            <div class="nav-buttons">
+                <a class="btn btn-outline-light me-2" href="index.html">חזרה לדף הבית</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">דף הבית</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="maps.html">מפות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">שירותים</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">אודות</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">צור קשר</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- OpenStreetMap Standard -->
+        <div class="map-container">
+            <h3 class="map-title">OpenStreetMap סטנדרטי</h3>
+            <div id="map1" class="map"></div>
+        </div>
+
+        <!-- OpenTopoMap -->
+        <div class="map-container">
+            <h3 class="map-title">OpenTopoMap - מפה טופוגרפית</h3>
+            <div id="map2" class="map"></div>
+        </div>
+
+        <!-- CyclOSM -->
+        <div class="map-container">
+            <h3 class="map-title">CyclOSM - מפת אופניים</h3>
+            <div id="map3" class="map"></div>
+        </div>
+
+        <!-- OpenSeaMap -->
+        <div class="map-container">
+            <h3 class="map-title">OpenSeaMap - מפה ימית</h3>
+            <div id="map4" class="map"></div>
+        </div>
+
+        <!-- Humanitarian -->
+        <div class="map-container">
+            <h3 class="map-title">Humanitarian - מפה הומניטרית</h3>
+            <div id="map5" class="map"></div>
+        </div>
+
+        <!-- Stamen Terrain -->
+        <div class="map-container">
+            <h3 class="map-title">Stamen Terrain - מפת שטח</h3>
+            <div id="map6" class="map"></div>
+        </div>
+
+        <!-- Stamen Watercolor -->
+        <div class="map-container">
+            <h3 class="map-title">Stamen Watercolor - מפת צבעי מים</h3>
+            <div id="map7" class="map"></div>
+        </div>
+
+        <!-- OpenRailwayMap -->
+        <div class="map-container">
+            <h3 class="map-title">OpenRailwayMap - מפת רכבות</h3>
+            <div id="map8" class="map"></div>
+        </div>
+
+        <!-- OpenWeatherMap -->
+        <div class="map-container">
+            <h3 class="map-title">OpenWeatherMap - מפת מזג אוויר</h3>
+            <div id="map9" class="map"></div>
+        </div>
+
+        <!-- OpenFireMap -->
+        <div class="map-container">
+            <h3 class="map-title">OpenFireMap - מפת כיבוי אש</h3>
+            <div id="map10" class="map"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // מיקום ברירת מחדל - תל אביב
+        const defaultLocation = [32.0853, 34.7818];
+        const defaultZoom = 13;
+
+        // יצירת המפות
+        const maps = {
+            // OpenStreetMap Standard
+            map1: L.map('map1').setView(defaultLocation, defaultZoom),
+
+            // OpenTopoMap
+            map2: L.map('map2').setView(defaultLocation, defaultZoom),
+
+            // CyclOSM
+            map3: L.map('map3').setView(defaultLocation, defaultZoom),
+
+            // OpenSeaMap
+            map4: L.map('map4').setView(defaultLocation, defaultZoom),
+
+            // Humanitarian
+            map5: L.map('map5').setView(defaultLocation, defaultZoom),
+
+            // Stamen Terrain
+            map6: L.map('map6').setView(defaultLocation, defaultZoom),
+
+            // Stamen Watercolor
+            map7: L.map('map7').setView(defaultLocation, defaultZoom),
+
+            // OpenRailwayMap
+            map8: L.map('map8').setView(defaultLocation, defaultZoom),
+
+            // OpenWeatherMap
+            map9: L.map('map9').setView(defaultLocation, defaultZoom),
+
+            // OpenFireMap
+            map10: L.map('map10').setView(defaultLocation, defaultZoom)
+        };
+
+        // הגדרת שכבות המפה
+        const layers = {
+            osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            topo: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+            cycle: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+            sea: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png',
+            humanitarian: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+            terrain: 'https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg',
+            watercolor: 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
+            railway: 'https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
+            weather: 'https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png',
+            fire: 'https://tiles.openfiremap.org/hytiles/{z}/{x}/{y}.png'
+        };
+
+        // הוספת השכבות למפות
+        L.tileLayer(layers.osm, { attribution: '© OpenStreetMap contributors' }).addTo(maps.map1);
+        L.tileLayer(layers.topo, { attribution: '© OpenTopoMap' }).addTo(maps.map2);
+        L.tileLayer(layers.cycle, { attribution: '© CyclOSM' }).addTo(maps.map3);
+        L.tileLayer(layers.sea, { attribution: '© OpenSeaMap' }).addTo(maps.map4);
+        L.tileLayer(layers.humanitarian, { attribution: '© Humanitarian OSM' }).addTo(maps.map5);
+        L.tileLayer(layers.terrain, { attribution: '© Stamen Design' }).addTo(maps.map6);
+        L.tileLayer(layers.watercolor, { attribution: '© Stamen Design' }).addTo(maps.map7);
+        L.tileLayer(layers.railway, { attribution: '© OpenRailwayMap' }).addTo(maps.map8);
+        L.tileLayer(layers.weather, { attribution: '© OpenWeatherMap' }).addTo(maps.map9);
+        L.tileLayer(layers.fire, { attribution: '© OpenFireMap' }).addTo(maps.map10);
+
+        // סנכרון תנועה בין כל המפות
+        Object.values(maps).forEach(map => {
+            map.on('move', function () {
+                Object.values(maps).forEach(otherMap => {
+                    if (otherMap !== map) {
+                        otherMap.setView(map.getCenter(), map.getZoom());
+                    }
+                });
+            });
+        });
+
+        // התאמת גודל המפות בעת שינוי גודל החלון
+        window.addEventListener('resize', () => {
+            Object.values(maps).forEach(map => map.invalidateSize());
+        });
+    </script>
+</body>
+
+</html>
